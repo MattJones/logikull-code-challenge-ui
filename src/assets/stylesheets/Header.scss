@@ -1,4 +1,6 @@
+@import 'mixins';
 $purple: #311B92;
+
 .header-container {
   background-color: $purple;
   height: 48px;
@@ -15,6 +17,10 @@ $purple: #311B92;
     font-size: 16px;
     padding-right: 24px;
     position: relative;
-    top: -2px;
+    top: -7px;
+
+    @include respond-to(tablet) {
+      top: -2px;
+    }
   }
 }

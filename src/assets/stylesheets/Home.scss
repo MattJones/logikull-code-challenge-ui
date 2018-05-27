@@ -1,3 +1,4 @@
+@import 'mixins';
 $purple: #311B92;
 
 .my-albums-container {
@@ -14,8 +15,15 @@ $purple: #311B92;
 
   .my-albums-container__header-new {
     float: right;
+    left: 20px;
     position: relative;
-    top: 10px;
+    top: -8px;
+
+    @include respond-to(tablet) {
+      top: 10px;
+      left: 0px;
+    }
+
 
     .artist-button {
       color: $purple;
@@ -44,6 +52,10 @@ $purple: #311B92;
     float: right;
     text-align: center;
     width: 25%;
+
+    @include respond-to(tablet) {
+      width: 19%;
+    }
 
     .value {
       font-size: 16px;
