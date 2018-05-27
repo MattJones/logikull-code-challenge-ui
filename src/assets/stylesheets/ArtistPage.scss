@@ -1,0 +1,28 @@
+$purple: #6A1B9A;
+
+.artist-header {
+  height: 75px;
+}
+
+.artist-info {
+  padding: 18px;
+}
+
+.title {
+  .md-text {
+    color: $purple;
+    font-size: 18px;
+  }
+}
+
+.artist-stats {
+  padding-top: 18px;
+}
+
+.common-words {
+  padding-bottom: 18px;
+}
+
+.VictoryContainer {
+  width: 30% !important;
+}

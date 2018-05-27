@@ -16,9 +16,7 @@ export class Home extends Component {
     super(props);
     this.state = {
       visible: false,
-      formData: {
-        name: ''
-      }
+      formData: { name: '' }
     }
   }
 

@@ -1,10 +1,18 @@
 $purple: #6A1B9A;
-
-.header {
+.header-container {
   background-color: $purple;
-  color: white;
-  font-size: 24px;
   height: 48px;
   width: 100%;
   padding: 6px 0 0 12px;
+
+  .header {
+    color: white;
+    font-size: 24px;
+    float: left;
+  }
+
+  .header-home-button {
+    float: right;
+    padding-right: 24px;
+  }
 }
