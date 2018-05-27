@@ -10,7 +10,7 @@ export class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header />
+        <Header history={this.props.history} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/artists/:id" component={ArtistPage} />

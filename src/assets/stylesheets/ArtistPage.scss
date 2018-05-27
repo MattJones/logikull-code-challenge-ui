@@ -1,0 +1,44 @@
+@import 'mixins';
+
+$purple: #311B92;
+
+.artist-header {
+  height: 75px;
+}
+
+.artist-info {
+  padding: 18px;
+}
+.album-button {
+  float: right;
+  position: relative;
+  bottom: 48px;
+}
+
+.title {
+  .md-text {
+    color: $purple;
+    font-size: 18px;
+  }
+}
+
+.delete-button {
+  float: right;
+  position: relative;
+  bottom: 48px;
+  right: 14px;
+}
+
+.artist-stats {
+  padding-top: 18px;
+}
+
+.common-words {
+  padding-bottom: 18px;
+}
+
+.VictoryContainer {
+  @include respond-to(tablet) {
+    width: 30% !important;
+  }
+}
