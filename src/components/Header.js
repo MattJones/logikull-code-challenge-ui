@@ -6,7 +6,6 @@ import '../assets/stylesheets/Header.scss';
 const Header = (props) => {
   return (
     <div className="header-container">
-      <div className="header">My Album Manager</div>
       <Button
         className="header-home-button"
         icon
@@ -15,6 +14,7 @@ const Header = (props) => {
       >
         home
       </Button>
+      <div className="header">My Album Manager</div>
     </div>
   );
 }

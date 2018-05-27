@@ -74,13 +74,13 @@ export class Home extends Component {
     ];
 
     return (
-      <Card className="my-albums-container">
+      <Card className="my-albums-container page-container">
         <CardText className="my-albums-container__header">
           <div className="my-albums-container__header-title">Artists</div>
           <div className="my-albums-container__header-new">
             <Button
               flat
-              className="album-button"
+              className="artist-button"
               onClick={this.showDialog}
             >
               New Artist

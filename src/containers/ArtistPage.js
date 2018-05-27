@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Card, CardText, CardTitle, Divider } from 'react-md';
+import { Button, Card, CardText, CardTitle, Divider } from 'react-md';
 import { connect } from 'react-redux';
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
@@ -69,7 +69,7 @@ export class ArtistPage extends Component {
             data={chartData}
             x="year"
             y="records"
-            style={{data: {fill: "#6A1B9A"}}}
+            style={{data: {fill: "#311B92"}}}
           />
         </VictoryChart>
       );
@@ -80,12 +80,20 @@ export class ArtistPage extends Component {
     const { artist } = this.props;
 
     return (
-      <Card>
+      <Card className="page-container">
         <CardText className="artist-header"><h1>{artist.name}</h1></CardText>
         <Divider />
         <div className="artist-info">
-          <div>
+          <div className="album-info-header">
             <h2>Albums</h2>
+            <Button
+              flat
+              className="album-button"
+              onClick={this.showDialog}
+              primary
+            >
+              New Album
+            </Button>
             {this.formatAlbums()}
           </div>
           <div className="artist-stats">

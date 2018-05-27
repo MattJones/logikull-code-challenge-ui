@@ -1,4 +1,4 @@
-$purple: #6A1B9A;
+$purple: #311B92;
 
 .my-albums-container {
   padding: 12px;
@@ -14,7 +14,10 @@ $purple: #6A1B9A;
 
   .my-albums-container__header-new {
     float: right;
-    .album-button {
+    position: relative;
+    top: 10px;
+
+    .artist-button {
       color: $purple;
     }
   }
@@ -37,7 +40,7 @@ $purple: #6A1B9A;
   .artist-albums {
     float: right;
     text-align: center;
-    width: 11%;
+    width: 25%;
 
     .value {
       font-size: 16px;

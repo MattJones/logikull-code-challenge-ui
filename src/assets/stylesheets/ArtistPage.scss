@@ -1,4 +1,4 @@
-$purple: #6A1B9A;
+$purple: #311B92;
 
 .artist-header {
   height: 75px;
@@ -6,6 +6,11 @@ $purple: #6A1B9A;
 
 .artist-info {
   padding: 18px;
+}
+.album-button {
+  float: right;
+  position: relative;
+  bottom: 48px;
 }
 
 .title {
