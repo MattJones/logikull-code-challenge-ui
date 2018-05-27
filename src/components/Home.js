@@ -1,16 +1,17 @@
 import React from 'react';
 import Card from 'react-md/lib/Cards/Card';
+import CardText from 'react-md/lib/Cards/CardText'
 import Divider from 'react-md/lib/Dividers';
 
 import '../assets/stylesheets/Home.scss';
 
 const Home = props => {
   return (
-    <div className="my-albums-container">
-      <div clasName="my-albums-container__header">
-        <div>All Albums</div>
+    <Card className="my-albums-container">
+      <CardText clasName="my-albums-container__header">
+        <div className="header-title">All Albums</div>
         <div>New Album</div>
-      </div>
+      </CardText>
       <Divider />
       <Card>
         <div>
@@ -23,7 +24,7 @@ const Home = props => {
           <Divider />
         </div>
       </Card>
-    </div>
+    </Card>
   );
 };
 

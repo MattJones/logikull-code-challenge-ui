@@ -7,6 +7,6 @@ describe('Component: Home', () => {
   it('renders the albums container', () => {
     const wrapper = shallow(<Home />);
 
-    expect(wrapper.find('.my-albums-container__header')).toBe(true);
+    expect(wrapper.find('.header-title')).toBeTruthy();
   });
 });
