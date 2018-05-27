@@ -9,7 +9,7 @@ $purple: #311B92;
   .my-albums-container__header-title {
     float: left;
     font-size: 30px;
-    color: gray;
+    color: $purple;
   }
 
   .my-albums-container__header-new {
@@ -24,17 +24,20 @@ $purple: #311B92;
 
   .my-albums-container__artists-container {
     font-size: 20px;
-  }
-
-  .artist-container {
-    width: 100%;
     height: 75px;
   }
 
+  .artist-container {
+    height: 48px;
+  }
+
   .artist-name {
-    float: left;
     font-size: 16px;
-    padding-top: 8px;
+  }
+
+  .delete-artist-button {
+    position: relative;
+    top: -5px;
   }
 
   .artist-albums {

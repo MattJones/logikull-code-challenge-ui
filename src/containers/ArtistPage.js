@@ -1,13 +1,32 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button, Card, CardText, CardTitle, Divider } from 'react-md';
+import {
+  Button,
+  Card,
+  CardText,
+  CardTitle,
+  Divider,
+  DialogContainer,
+  TextField
+} from 'react-md';
 import { connect } from 'react-redux';
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
+import { VictoryBar, VictoryChart } from 'victory';
 
-import { getArtist } from '../store/artist/actions';
+import { getArtist, createAlbum, deleteAlbum } from '../store/artist/actions';
 import '../assets/stylesheets/ArtistPage.scss';
 
 export class ArtistPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+      formData: {
+        title: '',
+        year: '',
+        condition: ''
+      }
+    }
+  }
 
   componentDidMount() {
     const { dispatch, match } = this.props;
@@ -16,8 +35,33 @@ export class ArtistPage extends Component {
     dispatch(getArtist(id));
   }
 
+  handleUpdate(name, value) {
+    const newFormData = Object.assign({}, this.state.formData, {
+      [name]: value
+    });
+    this.setState({ formData: newFormData });
+  }
+
+  showDialog = () => {
+    this.setState({ visible: true });
+  };
+
+  hideDialog = () => {
+    this.setState({ visible: false });
+  };
+
+  submit = () => {
+    const { formData } = this.state;
+    const { artist, dispatch } = this.props;
+    const artistId = artist.id;
+
+    dispatch(createAlbum(formData, artistId))
+    this.hideDialog();
+  };
+
   formatCommonWords() {
     const { artist } = this.props;
+
     if (artist.common_words) {
       return artist.common_words.map((word) => {
         return (
@@ -34,6 +78,14 @@ export class ArtistPage extends Component {
         return (
           <Card key={album.id} className="album-container">
             <CardTitle className="title" title={album.title} />
+            <Button
+              className="delete-button"
+              flat
+              onClick={() => {this.deleteAlbum(album.id)}}
+              secondary
+            >
+              Delete
+            </Button>
             <CardText>
               <div>Album Year: {album.year}</div>
               <div>Album Condition: {album.condition}</div>
@@ -42,6 +94,12 @@ export class ArtistPage extends Component {
         );
       });
     }
+  }
+
+  deleteAlbum(albumId) {
+    const { artist, dispatch } = this.props;
+    const artistId = artist.id;
+    dispatch(deleteAlbum(albumId, artistId));
   }
 
   formatBarChart() {
@@ -78,6 +136,11 @@ export class ArtistPage extends Component {
 
   render() {
     const { artist } = this.props;
+    const { visible, formData } = this.state;
+    const actions = [
+      <Button flat secondary onClick={this.hideDialog}>Cancel</Button>,
+      <Button raised primary onClick={this.submit}>Create</Button>
+    ];
 
     return (
       <Card className="page-container">
@@ -115,10 +178,49 @@ export class ArtistPage extends Component {
             </Card>
           </div>
         </div>
+        <DialogContainer
+          id="newAlbum"
+          visible={visible}
+          onHide={this.hideDialog}
+          actions={actions}
+          title="Add New Album"
+        >
+          <TextField
+            className="title-field"
+            id="title"
+            label="Title"
+            name="title"
+            onChange={(value, e) => this.handleUpdate(e.target.name, value)}
+            value={formData.title}
+          />
+          <TextField
+            className="year-field"
+            id="year"
+            label="Year"
+            name="year"
+            onChange={(value, e) => this.handleUpdate(e.target.name, value)}
+            value={formData.year}
+          />
+          <TextField
+            className="condition-field"
+            id="condition"
+            label="Condition"
+            name="condition"
+            onChange={(value, e) => this.handleUpdate(e.target.name, value)}
+            value={formData.condition}
+          />
+        </DialogContainer>
       </Card>
     );
   }
 }
+
+ArtistPage.propTypes = {
+  artist: PropTypes.object,
+  dispatch: PropTypes.func,
+  match: PropTypes.object
+};
+
 
 function mapStateToProps(state) {
   return {

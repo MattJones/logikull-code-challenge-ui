@@ -1,7 +1,11 @@
+@import 'mixins';
+
 .card {
   margin: 16px;
 }
 
 .page-container {
-  margin: 24px 20% 0 20%;
+  @include respond-to(tablet) {
+    margin: 24px 20% 0 20%;
+  }
 }

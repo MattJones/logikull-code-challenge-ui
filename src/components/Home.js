@@ -7,7 +7,7 @@ import Card from 'react-md/lib/Cards/Card';
 import CardText from 'react-md/lib/Cards/CardText'
 import Divider from 'react-md/lib/Dividers';
 
-import { createArtist, getArtists } from '../store/artist/actions';
+import { createArtist, getArtists, deleteArtist } from '../store/artist/actions';
 
 import '../assets/stylesheets/Home.scss';
 
@@ -50,20 +50,33 @@ export class Home extends Component {
       return (
         <div className="my-albums-container__artists-container" key={artist.id}>
           <Button
+            className="delete-artist-button"
+            icon
+            onClick={() => this.deleteArtist(artist.id)}
+            secondary
+          >
+            clear
+          </Button>
+          <Button
             className="artist-container"
             flat
             onClick={() => this.props.history.push(`/artists/${artist.id}`)}
           >
               <div className="artist-name">{artist.name}</div>
-              <div className="artist-albums">
-                <div className="value">{artist.number_of_albums}</div>
-                <div className="label">Number of Albums</div>
-              </div>
           </Button>
+          <div className="artist-albums">
+            <div className="value">{artist.number_of_albums}</div>
+            <div className="label">Number of Albums</div>
+          </div>
           <Divider />
         </div>
       );
     });
+  }
+
+  deleteArtist(artistId) {
+    const { dispatch } = this.props;
+    dispatch(deleteArtist(artistId));
   }
 
   render() {
