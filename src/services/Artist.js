@@ -17,6 +17,18 @@ class Artist {
     return await checkStatus(response);
   }
 
+  async getArtist(id) {
+    const artistUrl = `http://localhost:3000/artists/${id}`
+    const response = await fetch(artistUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await checkStatus(response);
+  }
+
   async getArtists() {
     const artistsUrl = 'http://localhost:3000/artists';
     const response = await fetch(artistsUrl, {

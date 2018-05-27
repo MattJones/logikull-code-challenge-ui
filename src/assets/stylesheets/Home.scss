@@ -1,4 +1,7 @@
+$purple: #6A1B9A;
+
 .my-albums-container {
+  padding: 12px;
 
   .md-card-text {
     height: 72px;
@@ -12,7 +15,7 @@
   .my-albums-container__header-new {
     float: right;
     .album-button {
-      color: purple;
+      color: $purple;
     }
   }
 

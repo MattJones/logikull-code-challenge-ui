@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import Header from '../components/Header';
 import Home from '../components/Home';
+import ArtistPage from '../containers/ArtistPage';
 import '../assets/stylesheets/App.scss';
 
 export class App extends Component {
@@ -10,7 +11,10 @@ export class App extends Component {
     return (
       <div className="app">
         <Header />
-        <Route exact path="/" component={Home} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/artists/:id" component={ArtistPage} />
+        </Switch>
       </div>
     );
   }

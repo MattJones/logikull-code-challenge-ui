@@ -51,7 +51,11 @@ export class Home extends Component {
     return artists.map((artist) => {
       return (
         <div className="my-albums-container__artists-container" key={artist.id}>
-          <Button flat className="artist-container">
+          <Button
+            className="artist-container"
+            flat
+            onClick={() => this.props.history.push(`/artists/${artist.id}`)}
+          >
               <div className="artist-name">{artist.name}</div>
               <div className="artist-albums">
                 <div className="value">{artist.number_of_albums}</div>
