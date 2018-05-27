@@ -1,24 +1,10 @@
+$purple: #6A1B9A;
+
 .header {
-  text-align: center;
-}
-
-.header__body {
-  background-color: #222;
-  padding: 20px;
+  background-color: $purple;
   color: white;
+  font-size: 24px;
+  height: 48px;
+  width: 100%;
+  padding: 6px 0 0 12px;
 }
-
-.header__logo {
-  animation: logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.header__title {
-  color: white;
-}
-
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
