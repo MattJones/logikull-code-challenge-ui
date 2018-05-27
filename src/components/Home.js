@@ -7,19 +7,30 @@ import Card from 'react-md/lib/Cards/Card';
 import CardText from 'react-md/lib/Cards/CardText'
 import Divider from 'react-md/lib/Dividers';
 
-import { getArtists } from '../store/artist/actions';
+import { createArtist, getArtists } from '../store/artist/actions';
 
 import '../assets/stylesheets/Home.scss';
 
 export class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false }
+    this.state = {
+      visible: false,
+      formData: {
+        name: ''
+      }
+    }
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getArtists());
+    this.props.dispatch(getArtists());
+  }
+
+  handleUpdate(name, value) {
+    const newFormData = Object.assign({}, this.state.formData, {
+      [name]: value
+    });
+    this.setState({ formData: newFormData });
   }
 
   showDialog = () => {
@@ -28,6 +39,12 @@ export class Home extends Component {
 
   hideDialog = () => {
     this.setState({ visible: false });
+  };
+
+  submit = () => {
+    const name = this.state.formData.name
+    this.props.dispatch(createArtist(name))
+    this.hideDialog();
   };
 
   formatArtists(artists) {
@@ -48,10 +65,10 @@ export class Home extends Component {
   }
 
   render() {
-    const { visible } = this.state;
+    const { visible, formData } = this.state;
     const actions = [
-      { secondary: true, children: 'Cancel', onClick: this.hideDialog },
-      <Button raised primary onClick={this.hideDialog}>Create</Button>
+      <Button flat secondary onClick={this.hideDialog}>Cancel</Button>,
+      <Button raised primary onClick={this.submit}>Create</Button>
     ];
 
     return (
@@ -69,6 +86,7 @@ export class Home extends Component {
           </div>
         </CardText>
         {this.formatArtists(this.props.artists)}
+
         <DialogContainer
           id="newArtist"
           visible={visible}
@@ -77,9 +95,12 @@ export class Home extends Component {
           title="Add New Artist"
         >
           <TextField
-            id="simple-action-dialog-field"
-            label="Artst Name"
-            placeholder="Name"
+            className="name-field"
+            id="name"
+            label="Name"
+            name="name"
+            onChange={(value, e) => this.handleUpdate(e.target.name, value)}
+            value={formData.name}
           />
         </DialogContainer>
       </Card>

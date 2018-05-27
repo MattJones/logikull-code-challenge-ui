@@ -1,4 +1,7 @@
 import {
+  CREATE_ARTIST__FAILURE,
+  CREATE_ARTIST__REQUEST,
+  CREATE_ARTIST__SUCCESS,
   GET_ARTISTS__FAILURE,
   GET_ARTISTS__REQUEST,
   GET_ARTISTS__SUCCESS
@@ -6,11 +9,24 @@ import {
 
 const initialState = {
   list: [],
-  getArtistsRequest: false
+  getArtistsRequest: false,
+  createArtistRequest: false
 };
 
 function artists(state = initialState, action) {
   switch (action.type) {
+    case CREATE_ARTIST__FAILURE:
+      return Object.assign({}, state, {
+        createArtistRequest: false
+      });
+    case CREATE_ARTIST__REQUEST:
+      return Object.assign({}, state, {
+        createArtistRequest: true
+      });
+    case CREATE_ARTIST__SUCCESS:
+      return Object.assign({}, state, {
+        createArtistRequest: false
+      });
     case GET_ARTISTS__FAILURE:
       return Object.assign({}, state, {
         list: [],
