@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Button } from 'react-md';
+import { Button, DialogContainer, TextField } from 'react-md';
 import Card from 'react-md/lib/Cards/Card';
 import CardText from 'react-md/lib/Cards/CardText'
 import Divider from 'react-md/lib/Dividers';
@@ -12,11 +12,23 @@ import { getArtists } from '../store/artist/actions';
 import '../assets/stylesheets/Home.scss';
 
 export class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { visible: false }
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(getArtists());
   }
+
+  showDialog = () => {
+    this.setState({ visible: true });
+  };
+
+  hideDialog = () => {
+    this.setState({ visible: false });
+  };
 
   formatArtists(artists) {
     return artists.map((artist) => {
@@ -36,13 +48,40 @@ export class Home extends Component {
   }
 
   render() {
+    const { visible } = this.state;
+    const actions = [
+      { secondary: true, children: 'Cancel', onClick: this.hideDialog },
+      <Button raised primary onClick={this.hideDialog}>Create</Button>
+    ];
+
     return (
       <Card className="my-albums-container">
         <CardText className="my-albums-container__header">
-          <div className="my-albums-container__header-title">All Albums</div>
-          <div className="my-albums-container__header-new-album">New Album</div>
+          <div className="my-albums-container__header-title">Artists</div>
+          <div className="my-albums-container__header-new">
+            <Button
+              flat
+              className="album-button"
+              onClick={this.showDialog}
+            >
+              New Artist
+            </Button>
+          </div>
         </CardText>
         {this.formatArtists(this.props.artists)}
+        <DialogContainer
+          id="newArtist"
+          visible={visible}
+          onHide={this.hideDialog}
+          actions={actions}
+          title="Add New Artist"
+        >
+          <TextField
+            id="simple-action-dialog-field"
+            label="Artst Name"
+            placeholder="Name"
+          />
+        </DialogContainer>
       </Card>
     );
   }

@@ -9,10 +9,11 @@
     color: gray;
   }
 
-  .my-albums-container__header-new-album {
+  .my-albums-container__header-new {
     float: right;
-    color: purple;
-    padding-top: 12px;
+    .album-button {
+      color: purple;
+    }
   }
 
   .my-albums-container__artists-container {
